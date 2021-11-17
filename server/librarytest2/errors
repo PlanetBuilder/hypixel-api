@@ -1,0 +1,32 @@
+Mon Nov 15 18:03:02 CET 2021
+
+kotlinx.serialization.json.internal.JsonDecodingException: Expected start of the object '{', but had 'EOF' instead
+JSON input: .....00b53')"> </div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
+	at kotlinx.serialization.json.internal.JsonExceptionsKt.JsonDecodingException(JsonExceptions.kt:24)
+	at kotlinx.serialization.json.internal.JsonExceptionsKt.JsonDecodingException(JsonExceptions.kt:32)
+	at kotlinx.serialization.json.internal.AbstractJsonLexer.fail(AbstractJsonLexer.kt:514)
+	at kotlinx.serialization.json.internal.AbstractJsonLexer.fail(AbstractJsonLexer.kt:219)
+	at kotlinx.serialization.json.internal.AbstractJsonLexer.unexpectedToken(AbstractJsonLexer.kt:202)
+	at kotlinx.serialization.json.internal.StringJsonLexer.consumeNextToken(StringJsonLexer.kt:70)
+	at kotlinx.serialization.json.internal.StreamingJsonDecoder.beginStructure(StreamingJsonDecoder.kt:40)
+	at de.planetbuilder.unofficialhypixelapi.data.skyblockdata.auctions.TotalAuctionsPage$$serializer.deserialize(TotalAuctionsPage.kt:6)
+	at de.planetbuilder.unofficialhypixelapi.data.skyblockdata.auctions.TotalAuctionsPage$$serializer.deserialize(TotalAuctionsPage.kt:6)
+	at kotlinx.serialization.json.internal.PolymorphicKt.decodeSerializableValuePolymorphic(Polymorphic.kt:59)
+	at kotlinx.serialization.json.internal.StreamingJsonDecoder.decodeSerializableValue(StreamingJsonDecoder.kt:35)
+	at kotlinx.serialization.json.Json.decodeFromString(Json.kt:100)
+	at de.planetbuilder.unofficialhypixelapi.data.skyblockdata.auctions.AuctionRelatedData.getTotalAuctionsPage(AuctionRelatedData.kt:39)
+	at de.planetbuilder.unofficialhypixelapi.data.skyblockdata.auctions.AuctionRelatedData.getAuctionsData(AuctionRelatedData.kt:25)
+	at UpdateGodPotData.run(Main.kt:61)
+	at java.base/java.util.TimerThread.mainLoop(Timer.java:556)
+	at java.base/java.util.TimerThread.run(Timer.java:506)
+
+
+
+
+
