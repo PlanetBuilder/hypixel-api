@@ -1,2 +1,2 @@
 # hypixel-api
-Doing stuf with the Hypixel API
+Doing stuff with the Hypixel API in Kotlin/JS
