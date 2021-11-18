@@ -1,0 +1,30 @@
+body {
+    background-color: #212121;
+    color: lightgray;
+}
+
+.vis-time-axis .vis-text {
+    color: lightgray;
+}
+
+.vis-data-axis .vis-y-axis.vis-minor {
+    position: absolute;
+    width: 100%;
+    color: #dddddd;
+    white-space: nowrap;
+}
+
+.vis-data-axis .vis-y-axis.vis-major {
+    position: absolute;
+    width: 100%;
+    color: lightgray;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.vis-legend {
+    background-color: rgba(0,0,0,.5);
+    padding: 5px;
+    border: 1px solid #b3b3b3;
+    box-shadow: none;
+}

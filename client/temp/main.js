@@ -24,9 +24,11 @@ var showGroup = [
     false,
     true
 ];
-var minimumValue = 0
+var minimumValue = [
+    0,0,0,0,0,0
+]
 var maximumValue = 10000000
-
+var container
 var graph;
 var dataset;
 var groups = new vis.DataSet().add(
@@ -65,7 +67,7 @@ socket.onmessage = (msg) => {
     data = JSON.parse(msg.data);
 
 
-    var container = document.getElementById('visualization');
+    container = document.getElementById('graph');
     options = {
         defaultGroup: '',
         legend: true,
@@ -80,7 +82,6 @@ socket.onmessage = (msg) => {
 
     dataset = new vis.DataSet(getItems());
     graph = new vis.Graph2d(container, dataset, groups, options);
-
     updateGraph();
 }
 
@@ -89,7 +90,7 @@ function getItems() {
     var itemsIndex = 0
     for (let index = 0; index < data.length; index++) {
         for (let index2 = 0; index2 < 6; index2++) {
-            if (data[index].boxplotValues[0] >= minimumValue) {
+            if (data[index].boxplotValues[index2] >= minimumValue[index2]) {
                 items[itemsIndex] = { x: data[index].timestamp, y: data[index].boxplotValues[index2], group: groupNames[index2] };
                 itemsIndex++;
             }
@@ -99,25 +100,33 @@ function getItems() {
 }
 
 function updateGraph() {
-    data = new vis.DataSet(getItems())
-    graph.setItems(data)
-    graph.setOptions({
-        groups: {
-            visibility: {
-                'minimum': showGroup[0],
-                '1st quartile': showGroup[1],
-                'median': showGroup[2],
-                '3rd quartile': showGroup[3],
-                'maximum': showGroup[4],
-                '5% low': showGroup[5],
-                "__ungrouped__": false
-            }
-        }
-    })
+    dataset = new vis.DataSet(getItems())
+    document.getElementById('graph').remove();
+
+    container = document.createElement("div");
+    container.id = "graph"
+    container.style = "position: relative;"
+    document.body.insertBefore(container, document.getElementById('buttons'))
+    graph = new vis.Graph2d(container, dataset, groups, options)
+}
+
+document.getElementsByClassName('minimumValue').onclick = function() {
+    var value = document.getElementsByClassName('').value;
+    alert(value);
+}
+
+function checkIfEnterThenMinimum(event,i) {
+    console.log("hi")
+    if (event.keyCode === 13) {
+        setMinimumValue(i)
+    }
 }
 
 function setMinimumValue(i) {
-    let value = document.getElementById("minimumValue").value;
+    let value = document.getElementById("minimumValue" + i + "").value;
+    console.log(i);
+    console.log("minimumValue" + i);
+    console.log(value)
     if (!isNaN(value)) {
         minimumValue[i] = value;
     }
