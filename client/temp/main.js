@@ -17,24 +17,26 @@ var groupNames = [
     '5% low'
 ];
 var showGroup = [
-    false,
     true,
     true,
     true,
-    false,
+    true,
+    true,
     true
 ];
 var minimumValue = [
     0,0,0,0,0,0
 ]
-var maximumValue = 10000000
+var maximumValue = [
+    2147483647,2147483647,2147483647,2147483647,2147483647,2147483647
+]
 var container
 var graph;
 var dataset;
 var groups = new vis.DataSet().add(
     {
         id: 0,
-        content: 'minimum'
+        content: 'minimum',
     },
     {
         id: 1,
@@ -90,7 +92,7 @@ function getItems() {
     var itemsIndex = 0
     for (let index = 0; index < data.length; index++) {
         for (let index2 = 0; index2 < 6; index2++) {
-            if (data[index].boxplotValues[index2] >= minimumValue[index2]) {
+            if (data[index].boxplotValues[index2] >= minimumValue[index2] && data[index].boxplotValues[index2] <= maximumValue[index2] && showGroup[index2]) {
                 items[itemsIndex] = { x: data[index].timestamp, y: data[index].boxplotValues[index2], group: groupNames[index2] };
                 itemsIndex++;
             }
@@ -100,13 +102,14 @@ function getItems() {
 }
 
 function updateGraph() {
+    console.log("updating...");
     dataset = new vis.DataSet(getItems())
     document.getElementById('graph').remove();
 
     container = document.createElement("div");
     container.id = "graph"
     container.style = "position: relative;"
-    document.body.insertBefore(container, document.getElementById('buttons'))
+    document.getElementById('wrapper').insertBefore(container, document.getElementById('settings'))
     graph = new vis.Graph2d(container, dataset, groups, options)
 }
 
@@ -116,7 +119,6 @@ document.getElementsByClassName('minimumValue').onclick = function() {
 }
 
 function checkIfEnterThenMinimum(event,i) {
-    console.log("hi")
     if (event.keyCode === 13) {
         setMinimumValue(i)
     }
@@ -124,12 +126,28 @@ function checkIfEnterThenMinimum(event,i) {
 
 function setMinimumValue(i) {
     let value = document.getElementById("minimumValue" + i + "").value;
-    console.log(i);
-    console.log("minimumValue" + i);
-    console.log(value)
     if (!isNaN(value)) {
         minimumValue[i] = value;
     }
+    updateGraph();
+}
+
+function checkIfEnterThenMaximum(event, i) {
+    if (event.keyCode === 13) {
+        setMaximumValue(i)
+    }
+}
+
+function setMaximumValue(i) {
+    let value = document.getElementById("maximumValue" + i + "").value;
+    if (!isNaN(value)) {
+        maximumValue[i] = value;
+    }
+    updateGraph();
+}
+
+function invertActive(i) {
+    showGroup[i] = !showGroup[i]
     updateGraph();
 }
 

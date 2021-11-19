@@ -7,67 +7,139 @@
     <script src="main.js"></script>
     <link href="https://visjs.github.io/vis-timeline/styles/vis-timeline-graph2d.min.css" rel="stylesheet"
         type="text/css" />
-        <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
     <link rel="icon" href="./tmp.png" />
     <style></style>
 </head>
 
 <body>
-    <div id="graph" style="position: relative;"></div>
-    <div id="buttons">
-            <div id="minimum">
-                <p>Minimum: </p>
-                &nbsp;&nbsp;&nbsp;&nbsp;Active: <input type="checkbox" id="active0" onclick=""><br>
+    <div id="wrapper">
+        <div style="margin-top: 0;">
+            <h1>Price Overview - God Potion</h1>
+        </div>
+        <div id="graph">
+            <p style="margin-left: 4em;">loading graph...</p>
+        </div>
+        <div id="settings">
+            <div id="minimum" class="settings-child">
+                <h4>Minimum:</h4>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                Active: <input type="checkbox" id="active0" checked onchange="invertActive(0);"><br>
 
-                &nbsp;&nbsp;&nbsp;&nbsp;<input type="text" placeholder="Type a number" class="minimumValue" id="minimumValue0"
-                    onkeyup="checkIfEnterThenMinimum(event,0)">
-            <button type="button" onclick="setMinimumValue(0);">Set minimum value</button><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="text" placeholder="Type a number" class="minimumValue"
+                    id="minimumValue0" onkeyup="checkIfEnterThenMinimum(event,0)">
+                &nbsp;&nbsp;
+                <button type="button" onclick="setMinimumValue(0);">Set minimum value&nbsp;</button><br>
+
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="text" placeholder="Type a number" class="maximumValue"
+                    id="maximumValue0" onkeyup="checkIfEnterThenMaximum(event,0)">
+                &nbsp;&nbsp;
+                <button type="button" onclick="setMaximumValue(0);">Set maximum value</button><br>
             </div>
 
-            <div id="1st quartile">
-                <p>1st quartile: </p>
-                &nbsp;&nbsp;&nbsp;&nbsp;Active: <input type="checkbox" id="active0"><br>
+            <div id="1st quartile" class="settings-child">
+                <h4>1st quartile:</h4>
 
-                &nbsp;&nbsp;&nbsp;&nbsp;<input type="text" placeholder="Type a number" class="minimumValue" id="minimumValue1"
-                onkeyup="checkIfEnterThenMinimum(event,1)">
-            <button type="button" onclick="setMinimumValue(1);">Set minimum value</button><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                Active: <input type="checkbox" id="active1" checked onchange="invertActive(1);"><br>
+
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="text" placeholder="Type a number" class="minimumValue"
+                    id="minimumValue1" onkeyup="checkIfEnterThenMinimum(event,1)">
+
+                &nbsp;&nbsp;
+                <button type="button" onclick="setMinimumValue(1);">Set minimum value&nbsp;</button><br>
+
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="text" placeholder="Type a number" class="maximumValue"
+                    id="maximumValue1" onkeyup="checkIfEnterThenMaximum(event,1)">
+
+                &nbsp;&nbsp;
+                <button type="button" onclick="setMaximumValue(1);">Set maximum value</button><br>
             </div>
 
-            <div id="median">
-                <p>Median: </p>
-                &nbsp;&nbsp;&nbsp;&nbsp;Active: <input type="checkbox" id="active0"><br>
+            <div id="median" class="settings-child">
+                <h4>Median:</h4>
 
-                &nbsp;&nbsp;&nbsp;&nbsp;<input type="text" placeholder="Type a number" class="minimumValue" id="minimumValue2"
-                onkeyup="checkIfEnterThenMinimum(event,2)">
-            <button type="button" onclick="setMinimumValue(2);">Set minimum value</button><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                Active: <input type="checkbox" id="active2" checked onchange="invertActive(2);"><br>
+
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="text" placeholder="Type a number" class="minimumValue"
+                    id="minimumValue2" onkeyup="checkIfEnterThenMinimum(event,2)">
+                
+                &nbsp;&nbsp;
+                <button type="button" onclick="setMinimumValue(2);">Set minimum value&nbsp;</button><br>
+
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="text" placeholder="Type a number" class="maximumValue"
+                    id="maximumValue2" onkeyup="checkIfEnterThenMaximum(event,2)">
+                
+                &nbsp;&nbsp;
+                <button type="button" onclick="setMaximumValue(2);">Set maximum value&nbsp;</button><br>
             </div>
 
-            <div id="3rd quartile">
-                <p>3rd quartile: </p>
-                &nbsp;&nbsp;&nbsp;&nbsp;Active: <input type="checkbox" id="active0"><br>
+            <div id="3rd quartile" class="settings-child">
+                <h4>3rd quartile:</h4>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                Active: <input type="checkbox" id="active3" checked onchange="invertActive(3);"><br>
 
-                &nbsp;&nbsp;&nbsp;&nbsp;<input type="text" placeholder="Type a number" class="minimumValue" id="minimumValue3"
-                onkeyup="checkIfEnterThenMinimum(event,3)">
-            <button type="button" onclick="setMinimumValue(3);">Set minimum value</button><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="text" placeholder="Type a number" class="minimumValue"
+                    id="minimumValue3" onkeyup="checkIfEnterThenMinimum(event,3)">
+
+                &nbsp;&nbsp;
+                <button type="button" onclick="setMinimumValue(3);">Set minimum value&nbsp;</button><br>
+
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="text" placeholder="Type a number" class="maximumValue"
+                    id="maximumValue3" onkeyup="checkIfEnterThenMaximum(event,3)">
+
+                &nbsp;&nbsp;
+                <button type="button" onclick="setMaximumValue(3);">Set maximum value</button><br>
             </div>
 
-            <div id="maximum">
-                <p>Maximum: </p>
-                &nbsp;&nbsp;&nbsp;&nbsp;Active: <input type="checkbox" id="active0"><br>
+            <div id="maximum" class="settings-child">
+                <h4>Maximum:</h4>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                Active: <input type="checkbox" id="active4" checked onchange="invertActive(4);"><br>
 
-                &nbsp;&nbsp;&nbsp;&nbsp;<input type="text" placeholder="Type a number" class="minimumValue" id="minimumValue4"
-                onkeyup="checkIfEnterThenMinimum(event,4)">
-            <button type="button" onclick="setMinimumValue(4);">Set minimum value</button><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="text" placeholder="Type a number" class="minimumValue"
+                    id="minimumValue4" onkeyup="checkIfEnterThenMinimum(event,4)">
+
+                &nbsp;&nbsp;
+                <button type="button" onclick="setMinimumValue(4);">Set minimum value&nbsp;</button><br>
+
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="text" placeholder="Type a number" class="maximumValue"
+                    id="maximumValue4" onkeyup="checkIfEnterThenMaximum(event,4)">
+
+                &nbsp;&nbsp;
+                <button type="button" onclick="setMaximumValue(4);">Set maximum value</button><br>
             </div>
 
-            <div id="5% low">
-                <p>5% low: </p>
-                &nbsp;&nbsp;&nbsp;&nbsp;Active: <input type="checkbox" id="active0"><br>
+            <div id="5% low" class="settings-child">
+                <h4>5% low:</h4>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                Active: <input type="checkbox" id="active5" checked onchange="invertActive(5);"><br>
 
-                &nbsp;&nbsp;&nbsp;&nbsp;<input type="text" placeholder="Type a number" class="minimumValue" id="minimumValue5"
-                onkeyup="checkIfEnterThenMinimum(event,5)">
-            <button type="button" onclick="setMinimumValue(5);">Set minimum value</button><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="text" placeholder="Type a number" class="minimumValue"
+                    id="minimumValue5" onkeyup="checkIfEnterThenMinimum(event,5)">
+
+                &nbsp;&nbsp;
+                <button type="button" onclick="setMinimumValue(5);">Set minimum value&nbsp;</button><br>
+
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="text" placeholder="Type a number" class="maximumValue"
+                    id="maximumValue5" onkeyup="checkIfEnterThenMaximum(event,0)">
+
+                &nbsp;&nbsp;
+                <button type="button" onclick="setMaximumValue(0);">Set maximum value</button><br>
             </div>
+        </div>
     </div>
 </body>
-<script></script>
