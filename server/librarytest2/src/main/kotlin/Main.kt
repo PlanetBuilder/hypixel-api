@@ -8,32 +8,30 @@ import de.planetbuilder.unofficialhypixelapi.data.skyblockdata.auctions.SkyBlock
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import org.http4k.core.Request
-import org.http4k.core.Response
-import org.http4k.core.Status.Companion.OK
+import managers.HttpManager
 import org.http4k.lens.Path
-import org.http4k.routing.bind
-import org.http4k.routing.websockets
-import org.http4k.server.Jetty
-import org.http4k.server.PolyHandler
-import org.http4k.server.asServer
-import org.http4k.websocket.Websocket
-import org.http4k.websocket.WsHandler
-import org.http4k.websocket.WsMessage
 import java.io.File
 import java.io.IOException
 import java.nio.ByteBuffer
-import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.system.measureTimeMillis
 
 val requestingPath = Path.of("requesting")
 val websocketsHandler: MutableList<(String) -> Unit> = mutableListOf()
 
+
+
 fun main() {
+    val manager = HttpManager()
+
+
+    /*
     val ws: WsHandler = websockets("/{requesting}" bind { ws: Websocket -> ws.send(WsMessage(Json.encodeToString(allData("compact-god-pot-data.bin"))))})
     val http = {_: Request -> Response(OK).body("This is websockets lol") }
     PolyHandler(http, ws).asServer(Jetty(9000)).start()
+
+
+
     println("started on port 9000")
 
     println(Date(System.currentTimeMillis()).toString())
@@ -49,6 +47,7 @@ fun main() {
                 addDataToFile("errors",Date(System.currentTimeMillis()).toString() + "\n\n" + e.stackTraceToString() + "\n\n\n\n\n")
             }
     }
+    */
 }
 
 class UpdateGodPotData : TimerTask() {
